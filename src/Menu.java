@@ -14,7 +14,8 @@ public class Menu {
         System.out.println("---UnitConvert---");
         System.out.println("Selecciona que tipo de conversion deseas: \n " +
                 "1. SIU -> Anglosajon \n " +
-                "2. Anglosajon -> SIU");
+                "2. Anglosajon -> SIU \n" +
+                "opcion: ");
         opcion = sc.nextInt();
 
         switch (opcion) {
@@ -31,55 +32,94 @@ public class Menu {
     }
 
     private void SIU_TO_ANGLOSAJON() {
-        System.out.println("Ingrese la medida del SIU (Sistema Internacional de Unidades): " +
-                "-- Longitud -- \n" +
+        System.out.println("\n Ingrese la medida del SIU (Sistema Internacional de Unidades): \n" +
+                "== Longitud == \n" +
                 "m. Metro \n" +
-                "-- Masa -- \n" +
+                "== Masa == \n" +
                 "kg. Kilogramo \n" +
-                "-- Tiempo -- \n" +
-                "s. Segundo\n" +
-                "-- Temperatura\n" +
-                "k. Kelvin \n" +
+                "l. Litro \n" +
+                "== Temperatura ==\n" +
                 "c. Celsius \n" +
-                "-- Corriente Electrica -- \n" +
-                "a. Ampere \n" +
-                "-- Intensidad Luminosa --\n" +
-                "cd. Candela \n" +
-                "-- Cantidad de Sustancia -- \n" +
-                "mol. Mol \n" +
-                "floz. Onza Liquida");
+                ": ");
         siuMedida = sc.next();
         System.out.println("Ingrese el valor del SIU :");
         siu = sc.nextInt();
         System.out.println("Ingresa la medida deseada: ");
         System.out.println("\n " +
-                "-- Longitud -- \n " +
+                "== Longitud == \n " +
                 "in. Pulgada \n " +
                 "ft. Pie\n " +
                 "yd. Yarda \n " +
-                "mi. Milla -- \n " +
-                "-- Masa -- \n " +
-                "oz. Onza \n " +
+                "mi. Milla \n " +
+                "== Masa == \n " +
                 "lb. Libra \n " +
-                "ton. Tonelada \n " +
-                "-- Tiempo -- \n " +
-                "s. Segundo \n " +
-                "min. Minuto \n " +
-                "h. Hora \n " +
-                "-- Temperatura -- \n " +
-                "F. Fahrenheit \n " +
-                "-- Volumen -- \n " +
+                "== Volumen == \n " +
                 "floz. Onza Liquida \n " +
-                "pt. Pinta \n " +
-                "qt. Cuarto \n " +
                 "gal. Galón \n " +
-                "lbf. Libra-Fuerza");
-        sc.nextLine();
-        medida = sc.nextLine();
+                "f. Fahrenheit \n" +
+                ": ");
+        medida = sc.next().toLowerCase();
+        switch (siuMedida) {
+            case "m":
+                convertirMetros(medida);
+                break;
+            case "kg":
+                convertirKilogramos(medida);
+                break;
+            case "l":
+                convertirLitros(medida);
+                break;
+            case "c":
+                if (medida.equals("f")) {
+                    System.out.println("Resultado: " + ((siu * 9 / 5) + 32) + " F");
+                } else {
+                    System.out.println("Conversion invalida");
+                }
+                break;
+            default:
+                System.out.println("Conversion invalida o unidad desconocida");
+        }
+    }
+
+    private void convertirMetros(String medida) {
         switch (medida) {
             case "in":
-                System.out.println("El resultado de tu valor " + siuMedida + " a " + medida + " es de : " );
+                System.out.println(siu * Conversiones.METRO_A_PULGADA + " Pulgadas");
                 break;
+            case "ft":
+                System.out.println(siu * Conversiones.METRO_A_PIE + " pies");
+                break;
+            case "yd":
+                System.out.println(siu * Conversiones.METRO_A_YARDA + " yardas");
+                break;
+            case "mi":
+                System.out.println(siu * Conversiones.METRO_A_MILLA + " millas");
+                break;
+            default:
+                System.out.println("Conversión no valida");
+        }
+    }
+
+    public void convertirKilogramos(String medida) {
+        switch (medida) {
+            case "lb":
+                System.out.println(siu * Conversiones.KG_A_LIBRA + " libras");
+                break;
+            case "oz":
+                System.out.println(siu * Conversiones.KG_A_ONZA + " onzas");
+                break;
+            default:
+                System.out.println("Conversión invalida");
+        }
+    }
+
+    public void convertirLitros(String medida) {
+        switch (medida) {
+            case "gal":
+                System.out.println(siu * Conversiones.L_A_GALON + " galones");
+                break;
+            default:
+                System.out.println("Conversion invalida");
         }
     }
 
