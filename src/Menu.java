@@ -124,6 +124,116 @@ public class Menu {
     }
 
     public void ANGLOSAJON_TO_SIU() {
-        System.out.println("Ingrese la medida del ANGLOSAJON :");
+        System.out.println("\n Ingrese la medida del ANGLOSAJON: \n" +
+                "== Longitud == \n" +
+                "in. Pulgada \n" +
+                "ft. Pie \n" +
+                "yd. Yarda \n" +
+                "mi. Milla \n" +
+                "== Masa == \n" +
+                "lb. Libra \n" +
+                "oz. Onza \n" +
+                "== Volumen == \n" +
+                "gal. Galón \n" +
+                "floz. Onza líquida \n" +
+                "== Temperatura == \n" +
+                "f. Fahrenheit \n" +
+                ": ");
+
+        anglosajonMedida = sc.next().toLowerCase();
+
+        System.out.println("Ingrese el valor ANGLOSAJON:");
+        anglosajon = sc.nextInt();
+
+        System.out.println("Ingrese la medida deseada del SIU (m, kg, l, c): ");
+        medida = sc.next().toLowerCase();
+
+        switch (anglosajonMedida) {
+            case "in":
+            case "ft":
+            case "yd":
+            case "mi":
+                convertirLongitudAnglosajon(medida);
+                break;
+
+            case "lb":
+            case "oz":
+                convertirMasaAnglosajon(medida);
+                break;
+
+            case "gal":
+            case "floz":
+                convertirVolumenAnglosajon(medida);
+                break;
+
+            case "f":
+                if (medida.equals("c")) {
+                    System.out.println("Resultado: " + ((anglosajon - 32) * 5 / 9) + " °C");
+                } else {
+                    System.out.println("Conversión inválida");
+                }
+                break;
+
+            default:
+                System.out.println("Unidad no válida");
+        }
+    }
+
+    private void convertirLongitudAnglosajon(String medida) {
+        if (!medida.equals("m")) {
+            System.out.println("Conversión inválida");
+            return;
+        }
+
+        switch (anglosajonMedida) {
+            case "in":
+                System.out.println(anglosajon * Conversiones.PULGADA_A_METRO + " metros");
+                break;
+            case "ft":
+                System.out.println(anglosajon * Conversiones.PIE_A_METRO + " metros");
+                break;
+            case "yd":
+                System.out.println(anglosajon * Conversiones.YARDA_A_METRO + " metros");
+                break;
+            case "mi":
+                System.out.println(anglosajon * Conversiones.MILLA_A_METRO + " metros");
+                break;
+        }
+    }
+
+    private void convertirMasaAnglosajon(String medida) {
+        if (!medida.equals("kg")) {
+            System.out.println("Conversión inválida");
+            return;
+        }
+
+        switch (anglosajonMedida) {
+            case "lb":
+                System.out.println(anglosajon * Conversiones.LIBRA_A_KG + " kg");
+                break;
+            case "oz":
+                System.out.println(anglosajon * Conversiones.ONZA_A_KG + " kg");
+                break;
+        }
+    }
+
+    private void convertirVolumenAnglosajon(String medida) {
+        switch (anglosajonMedida) {
+            case "gal":
+                if (medida.equals("l")) {
+                    System.out.println(anglosajon * Conversiones.GALON_A_LITRO + " litros");
+                } else {
+                    System.out.println("Conversión inválida");
+                }
+                break;
+
+            case "floz":
+                if (medida.equals("ml")) {
+                    System.out.println(anglosajon * Conversiones.FLOZ_A_ML + " ml");
+                } else {
+                    System.out.println("Conversión inválida");
+                }
+                break;
+        }
     }
 }
